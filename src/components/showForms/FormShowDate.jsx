@@ -11,7 +11,7 @@ export default function FormShowDate(){
     return(
         <div style={style}>
             <ShearchComponent setData={setDataTable} setBandera={setBanderaUp}/>
-            <EnhancedTable data={dataTable} bandera={banderaUp} setBandera={setBanderaUp}></EnhancedTable>
+            <EnhancedTable data={dataTable} bandera={banderaUp} setData={setDataTable} setBandera={setBanderaUp}></EnhancedTable>
         </div>
     );
 };
