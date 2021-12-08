@@ -15,7 +15,7 @@
         $sql = "SELECT postulante.fecha,postulante.nombre,postulante.apellido,postulante.correo,postulante.numero,
         postulante.observacion,postulante.estado_idestado,postulante.ciudad_idciudad,curso_has_carrera.curso_idcurso,
         curso_has_carrera.carrera_idcarrera
-        FROM curso_has_carrera,postulante WHERE postulante.nombre LIKE '%{$parametro}%' and postulante.correo = curso_has_carrera.postulante_correo group by postulante.correo order by postulante.fecha desc;";
+        FROM curso_has_carrera,postulante WHERE postulante.apellido LIKE '%{$parametro}%' and postulante.correo = curso_has_carrera.postulante_correo group by postulante.correo order by postulante.fecha desc;";
         if($select = mysqli_query($conn,$sql)){
             $rawdata = array();
             $i=0;
