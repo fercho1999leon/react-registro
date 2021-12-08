@@ -22,6 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import configForm from './configForm.json'
+import BasicMenu from './BasicMenu';
 
 function createData(fecha, nombre, apellido, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
   return {
@@ -267,9 +268,7 @@ const EnhancedTableToolbar = (props) => {
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
+          <BasicMenu setData={props.setData} setBandera={props.setBandera}></BasicMenu>
         </Tooltip>
       )}
     </Toolbar>
@@ -349,7 +348,7 @@ export default function EnhancedTable(props) {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} setData={props.setData} setBandera={props.setBandera}/>
         <TableContainer>
           <Table
             sx={{ minWidth: 'auto' }}
