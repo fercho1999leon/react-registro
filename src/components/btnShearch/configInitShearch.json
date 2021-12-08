@@ -1,0 +1,10 @@
+{
+    "dbConect":{
+        "url":"",
+        "driver":"",
+        "db":"",
+        "table":"",
+        "typeOperation":"select or insert",
+        "search":""
+    }
+}
