@@ -1,7 +1,7 @@
 .StyleBtn{
     background-color: var(--color-primary);
     color: white;
-    height: 15%;
+    height: 50px;
     font-size: 90%;
     border: none;
     /*border-top: solid 1px white;

@@ -1,5 +1,6 @@
 .FormIngresoMain *{
     margin: 0;
+    padding: 0;
 }
 .FormIngresoMain {
     display: flex;
