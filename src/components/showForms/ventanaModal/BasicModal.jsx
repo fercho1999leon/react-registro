@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
+//import { styled } from '@mui/styles';
+//import { ThemeProvider,createTheme } from '@mui/material/styles';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -25,13 +27,26 @@ const btn = {
   backgroundColor: '#22376D',
   border: 'solid 2px var(--color-primary)',
   color: 'white',
-};
+  "&:hover":{
+    color: "var(--color-primary)",
+  }
+};/*
+let theme = createTheme({
+  palette: {
+    neutral: {
+      main: '#000',
+      contrastText: '#000',
+    },
+  },
+});*/
 export default function BasicModal(props) {
   const refVtnModal = useRef();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  /*<ThemeProvider theme={theme}>
+    <Button color="neutral" onClick={(e)=>{props.handlerClick(e,refVtnModal,handleOpen)}}>GUARDAR</Button>
+  </ThemeProvider> va dentro del div*/
   return (
     <div>
       <Button sx={btn} onClick={(e)=>{props.handlerClick(e,refVtnModal,handleOpen)}}>GUARDAR</Button>
