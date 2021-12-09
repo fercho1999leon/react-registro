@@ -25,7 +25,7 @@ export default function ShearchComponent(props){
                 </Box>
                 <span></span>
                 <Stack direction="row" spacing={2}>
-                    <Button onClick={(e)=>shearch(e,refTextShearch,props.setData,props.setBandera)} sx={style} variant="contained" href="#contained-buttons">
+                    <Button onClick={(e)=>shearch(e,refTextShearch,props.setData,props.setBandera)} sx={style} variant="contained">
                         BUSCAR
                     </Button>
                 </Stack>
