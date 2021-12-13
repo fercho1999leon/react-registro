@@ -14,15 +14,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import configForm from './configForm.json'
 import BasicMenu from './BasicMenu';
+import AlertDialog from './AlertDialog';
+import BasicModalUpDate from '../vtnModalUpDate/BasicModalUpDate';
 
 function createData(fecha, nombre, apellido, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
   return {
@@ -168,6 +167,12 @@ const headCells = [
     disablePadding: false,
     label: 'Carrera',
   },
+  {
+    id: 'idBtnUpdate',
+    numeric: false,
+    disablePadding: false,
+    label: 'Actualizar',
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -262,9 +267,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
+          <AlertDialog selected={props.selected} setSelected={props.setSelected} rows={rows} data={props.data} setData={props.setData}/>
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
@@ -296,7 +299,6 @@ export default function EnhancedTable(props) {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.correo);
@@ -348,7 +350,7 @@ export default function EnhancedTable(props) {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} setData={props.setData} setBandera={props.setBandera}/>
+        <EnhancedTableToolbar selected={selected} setSelected={setSelected} numSelected={selected.length} data={props.data} setData={props.setData} setBandera={props.setBandera}/>
         <TableContainer>
           <Table
             sx={{ minWidth: 'auto' }}
@@ -408,6 +410,7 @@ export default function EnhancedTable(props) {
                       <TableCell align="right">{row.ciudad_idciudad}</TableCell>
                       <TableCell align="right">{row.curso_idcurso}</TableCell>
                       <TableCell align="right">{row.carrera_idcarrera}</TableCell>
+                      <TableCell align="right">{<BasicModalUpDate correo={row.correo}></BasicModalUpDate>}</TableCell>
                     </TableRow>
                   );
                 })}
