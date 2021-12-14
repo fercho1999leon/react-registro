@@ -410,7 +410,7 @@ export default function EnhancedTable(props) {
                       <TableCell align="right">{row.ciudad_idciudad}</TableCell>
                       <TableCell align="right">{row.curso_idcurso}</TableCell>
                       <TableCell align="right">{row.carrera_idcarrera}</TableCell>
-                      <TableCell align="right">{<BasicModalUpDate correo={row.correo}></BasicModalUpDate>}</TableCell>
+                      <TableCell align="right">{<BasicModalUpDate dataUpDate={row}></BasicModalUpDate>}</TableCell>
                     </TableRow>
                   );
                 })}

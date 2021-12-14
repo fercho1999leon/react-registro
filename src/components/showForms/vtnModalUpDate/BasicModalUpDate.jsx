@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import FormIngreso from '../FormIngreso';
+import FormUpDate from './FormUpDate';
 
 const style = {
   position: 'absolute',
@@ -20,7 +20,6 @@ export default function BasicModalUpDate(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = (e) => {
     setOpen(true);
-    console.log(e.target.value);
   };
   const handleClose = () => setOpen(false);
   const styleSx = {
@@ -36,7 +35,7 @@ export default function BasicModalUpDate(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <FormIngreso></FormIngreso>
+          <FormUpDate dataUpDate={props.dataUpDate}></FormUpDate>
         </Box>
       </Modal>
     </div>
