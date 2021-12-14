@@ -19,13 +19,14 @@
 	$observacion = $dataJson->observacion;
 	$ciudad = $dataJson->ciudad;
 	$estado = $dataJson->estado;
-	$sql = "INSERT INTO postulante (correo, nombre, apellido, numero, observacion, estado_idestado, ciudad_idciudad) VALUES ('{$correo}', '{$nombre}', '{$apellido}', '{$numeroContacto}', '{$observacion}', {$estado}, {$ciudad});";
+	$idUpdate = $dataJson->idUpdate;
+	$sql = "UPDATE postulante SET correo = '{$correo}', nombre = '{$nombre}', apellido = '{$apellido}', numero = '{$numeroContacto}', observacion = '{$observacion}', fecha = now(), estado_idestado = '{$estado}', ciudad_idciudad = '{$ciudad}' WHERE (correo = '{$idUpdate}');";
 	if(mysqli_query($conn,$sql)){
 		if($typeInteres==1){
-			$sql="INSERT INTO curso_has_carrera (carrera_idcarrera, postulante_correo) VALUES ({$interes}, '{$correo}');";
+			$sql="UPDATE curso_has_carrera SET carrera_idcarrera = '{$interes}' WHERE (postulante_correo = '{$correo}');";
 			mysqli_query($conn, $sql);
 		}else if($typeInteres==2){
-			$sql="INSERT INTO curso_has_carrera (curso_idcurso, postulante_correo) VALUES ({$interes}, '{$correo}');";
+			$sql="UPDATE curso_has_carrera SET curso_idcurso = '{$interes}' WHERE (postulante_correo = '{$correo}');";
 			mysqli_query($conn, $sql);
 		}
 		mysqli_close($conn);

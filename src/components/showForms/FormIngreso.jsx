@@ -35,7 +35,6 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen) =>{
     }).then(response => {
         return response.text();
     }).then(respuestaText =>{
-        console.log(respuestaText);
         if(respuestaText==0){
             refVtnModal.current.textContent="USUARIO CREADO CORRECTAMENTE";
         }else if(respuestaText==1){

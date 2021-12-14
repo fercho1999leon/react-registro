@@ -1,10 +1,102 @@
-import React,{Component} from "react";
+import * as React from 'react';
+import {Component} from "react";
 import "../FormIngresoStyle.css";
 import configForm from "./configForm.json";
 import DB from "./upDateDB.php";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 const styleRadio = {
     margin: "auto 10px"
 }
+const packageData=(dataUpDate,setSatateConsulta)=>{
+    const arrayData = document.getElementsByClassName('dataOut');
+    const text = document.getElementsByClassName('text-result-get');
+    let estadoUsuario;
+    const typeInteres = arrayData[4].checked ? 1:2;
+    const url = DB;
+    const idUpdate=dataUpDate.correo;
+    if(arrayData[9].checked){estadoUsuario=1}
+    else if(arrayData[10].checked){estadoUsuario=2}
+    else if(arrayData[11].checked){estadoUsuario=3}
+    let archivoDatos={
+        nombre:arrayData[0].value==""?dataUpDate.nombre:arrayData[0].value,
+        apellido:arrayData[1].value==""?dataUpDate.apellido:arrayData[1].value,
+        correo:arrayData[2].value==""?dataUpDate.correo:arrayData[2].value,
+        numeroContacto:arrayData[3].value==""?dataUpDate.numero:arrayData[3].value,
+        typeInteres,
+        interes:arrayData[6].selectedIndex,
+        observacion:arrayData[7].value,
+        ciudad:arrayData[8].selectedIndex,
+        estado:estadoUsuario,
+        idUpdate
+    }
+    archivoDatos = JSON.stringify(archivoDatos);
+    let formData = new FormData();
+    formData.append('data', archivoDatos);
+    fetch(url,{
+        method: 'POST', 
+        body: formData, 
+    }).then(response => {
+        return response.text();
+    }).then(respuestaText =>{
+        if(respuestaText==0){
+            setSatateConsulta(true);
+            text['0'].textContent="Usuario actualizado... ";
+        }else if(respuestaText==1){
+            setSatateConsulta(true);
+            text['0'].textContent="Error al actualizar... ";
+        }
+    });
+}
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 'auto',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    pt: 2,
+    px: 4,
+    pb: 3,
+  };
+  
+  function ChildModal(props) {
+    const [open, setOpen] = React.useState(false);
+    const [stateConsulta, setSatateConsulta] = React.useState(false);
+    const handleOpen = () => {
+      setOpen(true);
+      packageData(props.dataUpDate,setSatateConsulta);
+    };
+    const handleClose = () => {
+        setOpen(false);
+        props.setCloseParent(false);
+    };
+  
+    return (
+      <React.Fragment>
+        <Button onClick={handleOpen}>Actualizar</Button>
+        <Modal
+          hideBackdrop
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="child-modal-title"
+          aria-describedby="child-modal-description"
+        >
+          <Box sx={{ ...style}}>
+            <h2 id="child-modal-title">Actualizacion</h2>
+            <p id="child-modal-description">
+              {stateConsulta?<h3 className='text-result-get'>Procesando</h3>:<CircularProgress />}
+            </p>
+            <Button onClick={handleClose}>Cerrar</Button>
+          </Box>
+        </Modal>
+      </React.Fragment>
+    );
+  }
 class RenderListInteres extends Component {
     constructor(props){
         super(props);
@@ -120,8 +212,23 @@ export default class FormUpDate extends Component{
                 }
             )
         };   
-        statusCiudad();  
-        console.log(this.props.dataUpDate.estado_idestado);
+        statusCiudad();
+        let valorState = -1;
+        const statusState = () =>{
+            this.props.dataUpDate.estado_idestado.map((el)=>{
+                if(el=="Contactado"){
+                    valorState=1;
+                    return;
+                }else if(el=="Sin contactar"){
+                    valorState=2;
+                    return;
+                }else if(el=="Cita"){
+                    valorState=3;
+                    return;
+                }
+            });
+        }
+        statusState();
         return(
             <div className="FormIngresoMain">
                 <div className="FormIngreso">
@@ -157,15 +264,15 @@ export default class FormUpDate extends Component{
                     <div>
                         <h3>Estado</h3>
                         <label htmlFor="idStatusContactado">Contactado</label>
-                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusContactado" name="estado" value="contactado" defaultChecked/>
+                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusContactado" name="estado" value="Contactado" defaultChecked={valorState==1?true:false}/>
                         <label htmlFor="idStatusSinContactar"> Sin Contactar</label>
-                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusSinContactar" name="estado" value="SinContactar" />
+                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusSinContactar" name="estado" value="SinContactar" defaultChecked={valorState==2?true:false}/>
                         <label htmlFor="idStatusCita"> Cita</label>
-                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusCita" name="estado" value="Cita" />
+                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusCita" name="estado" value="Cita" defaultChecked={valorState==3?true:false}/>
                     </div>
                 </div>
                 <div className="FormIngreso">
-                    <h1>BUTON</h1>
+                    <ChildModal setCloseParent={this.props.setCloseParent} dataUpDate={this.props.dataUpDate}/>
                 </div>
             </div>
         );

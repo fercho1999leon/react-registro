@@ -27,7 +27,7 @@ export default function BasicModalUpDate(props) {
   }
   return (
     <div>
-      <Button sx={styleSx} variant="contained" value={props.correo} onClick={(e=>{handleOpen(e)})}>Up Date</Button>
+      <Button sx={styleSx} variant="contained" onClick={(e=>{handleOpen(e)})}>Up Date</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -35,7 +35,7 @@ export default function BasicModalUpDate(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <FormUpDate dataUpDate={props.dataUpDate}></FormUpDate>
+          <FormUpDate dataUpDate={props.dataUpDate} setCloseParent={handleClose}></FormUpDate>
         </Box>
       </Modal>
     </div>
