@@ -16,6 +16,7 @@
     flex-wrap: nowrap;
     align-items: stretch;
     width: 80%;
+    min-width: 500px;
     height: auto;
     border: solid 3px var(--color-primary);
     border-radius: 15px;

@@ -348,8 +348,8 @@ export default function EnhancedTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+    <Box sx={{ width: 'auto'}}>
+      <Paper sx={{ width: 'auto', mb: 2 }}>
         <EnhancedTableToolbar selected={selected} setSelected={setSelected} numSelected={selected.length} data={props.data} setData={props.setData} setBandera={props.setBandera}/>
         <TableContainer>
           <Table

@@ -3,7 +3,8 @@ import EnhancedTable from './componetTable/EnhancedTable.jsx';
 import ShearchComponent from './shearchFuncion/ShearchComponent.jsx'
 const style = {
     margin: 'auto 5px',
-    width:'74.40%'
+    width:'inherit',
+    'min-width': '200px'
 }
 export default function FormShowDate(){
     const [dataTable,setDataTable] = useState("");
