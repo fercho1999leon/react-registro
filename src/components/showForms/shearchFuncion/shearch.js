@@ -13,9 +13,12 @@ export default function shearch(e,refTextShearch,setData,setBanderaUp){
         method: 'POST', 
         body: formData, 
     })
-    .then(res => {return res.text()})
+    .then(res => {
+        console.log("Resultado");
+        console.log(res);
+        return res.text();
+    })
     .then(dataJson => {
-        //console.log(dataJson);
         if(dataJson.length>0){
             setData(JSON.parse(dataJson));
             setBanderaUp(true);

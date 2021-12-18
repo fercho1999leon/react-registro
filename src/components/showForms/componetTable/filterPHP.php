@@ -1,9 +1,9 @@
 <?php
     $x = $_POST['data'];
-	$servername = "localhost";
+	$servername = "192.168.1.2";
 	$database = "registropostulantes"; 
-	$username = "root";
-	$password = "1234";	
+	$username = "registropostulantes";
+	$password = "Istred1995.";	
     $conn = mysqli_connect($servername, $username, $password, $database);
     // Check connection
     if (!$conn) {
