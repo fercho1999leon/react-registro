@@ -14,8 +14,6 @@ export default function shearch(e,refTextShearch,setData,setBanderaUp){
         body: formData, 
     })
     .then(res => {
-        console.log("Resultado");
-        console.log(res);
         return res.text();
     })
     .then(dataJson => {

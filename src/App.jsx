@@ -1,11 +1,12 @@
 import HeaderSite from './components/headerFile/HeaderSite';
-import BodyContainer from './components/bodyFile/BodyContainer';
 import './App.css';
+import React from 'react';
+import AdminRouter from './components/AdminRouter';
 function App() {
   return (
     <>
       <HeaderSite></HeaderSite>
-      <BodyContainer></BodyContainer>
+      <AdminRouter></AdminRouter>
     </>
   );
 }
