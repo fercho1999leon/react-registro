@@ -6,12 +6,14 @@ import { useState } from 'react';
 export default function AdminRouter() {
   const [stateLogin,setStateLogin] = useState({
     estadoLogin:false,
-    dataLogin:''
+    dataPassLogin:'',
+    dataUserLogin:''
   });
   window.addEventListener('popstate',(e)=>{if(window.location.pathname==='/'){
     setStateLogin({
       estadoLogin:false,
-      dataLogin:''
+      dataPassLogin:'',
+      dataUserLogin:''
     });
   }});
     return (

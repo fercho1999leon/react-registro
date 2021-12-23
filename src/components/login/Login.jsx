@@ -1,17 +1,37 @@
-import React from "react";
+import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
 import './loginStyle.css';
 import logoSPS from "./LOGO-SPS.svg";
 import ContextLogin from "../ContextLogin";
 import DB from "./LoginPHP.php";
-function loginDB(setStateLogin,navigate){
+import SqlConnt from "../SqlConnetPHP.php";
+const styleBX = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 100,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+function loginDB(setStateLogin,navigate,handleClose){
     const dateLogin = document.getElementsByClassName('txtBox');
     const user = dateLogin[0].value;
     const pass = dateLogin[1].value;
     const url = DB;
+    let urlSqlConnt = SqlConnt.split('/');
+    urlSqlConnt = urlSqlConnt[urlSqlConnt.length-1];
     let archivoDatos = {
         user,
-        pass
+        pass,
+        urlSqlConnt
     }
     archivoDatos = JSON.stringify(archivoDatos);
     let formData = new FormData();
@@ -24,14 +44,22 @@ function loginDB(setStateLogin,navigate){
         return res.text();
     })
     .then(dataJson => {
-        if(dataJson.length>0 && dataJson!=0){
+        if(dataJson.length>0 && dataJson!=0 && !dataJson.includes('<br />') && !dataJson.includes('Error')){
+            console.log(dataJson);
             setStateLogin({
                 estadoLogin:true,
-                dataLogin:dataJson
+                dataPassLogin:dataJson,
+                dataUserLogin:user
             });
+            handleClose();
             navigate('/registerUser');
+        }else{
+            handleClose();
         }
-    })
+    }).catch((err)=>{
+        handleClose();
+        console.log(err);
+    });
 }
 export default function Login(props) {
     let navigate = useNavigate();
@@ -65,12 +93,35 @@ export default function Login(props) {
                         className="txtBox"
                     />
                     <p id="messageError" style={{ "color": "red", "font-size": "90%" }}></p>
-                    <input type="button" value="Iniciar Sesion" to="/registerUser" id="btnLogin" onClick={(e)=>{
-                        loginDB(setStateLogin,navigate);
-                    }} />
+                    <BasicModal navigate={navigate} setStateLogin={setStateLogin}></BasicModal>
                     <a id="btnAbrir" style={{ "text-decoration": "none", "align-self": "flex-start", "margin-left": "5%" }}>Recuperar Contraseña</a>
                 </main>
             </div>
         </div>
     );
 }
+function BasicModal(props) {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  
+    return (
+      <div>
+        <Stack spacing={2} direction="row">
+            <Button sx={{bgcolor:'var(--color-primary)'}} onClick={(e)=>{
+                handleOpen();
+                loginDB(props.setStateLogin,props.navigate,handleClose);
+            }} variant="contained">Iniciar Session</Button>
+        </Stack>
+        <Modal
+          open={open}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={styleBX}>
+            <CircularProgress />
+          </Box>
+        </Modal>
+      </div>
+    );
+  }

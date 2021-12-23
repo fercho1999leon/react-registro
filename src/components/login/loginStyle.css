@@ -68,16 +68,6 @@ main{
     color: #656565;
     font-weight: bold;
 }
-#btnLogin{
-    padding: 4% 10%;
-    font-weight: bold;
-    border: none;
-    color: white;
-    border-radius: 10px;
-    background-color: rgb(38,52,107);
-    text-decoration: none;
-    cursor:pointer;
-}
 /*********************Ventana de recuperacin de contraseña***********/
 
 /*******************Version movil****************/
