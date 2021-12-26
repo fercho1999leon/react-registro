@@ -45,11 +45,11 @@ function loginDB(setStateLogin,navigate,handleClose){
     })
     .then(dataJson => {
         if(dataJson.length>0 && dataJson!=0 && !dataJson.includes('<br />') && !dataJson.includes('Error')){
-            console.log(dataJson);
             setStateLogin({
                 estadoLogin:true,
                 dataPassLogin:dataJson,
-                dataUserLogin:user
+                dataUserLogin:user,
+                urlSqlConnt
             });
             handleClose();
             navigate('/registerUser');
@@ -93,7 +93,7 @@ export default function Login(props) {
                         className="txtBox"
                     />
                     <p id="messageError" style={{ "color": "red", "font-size": "90%" }}></p>
-                    <BasicModal navigate={navigate} setStateLogin={setStateLogin}></BasicModal>
+                    <BasicModal navigate={navigate} setStateLogin={setStateLogin['setStateLogin']}></BasicModal>
                     <a id="btnAbrir" style={{ "text-decoration": "none", "align-self": "flex-start", "margin-left": "5%" }}>Recuperar Contraseña</a>
                 </main>
             </div>

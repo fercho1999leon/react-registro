@@ -7,18 +7,20 @@ export default function AdminRouter() {
   const [stateLogin,setStateLogin] = useState({
     estadoLogin:false,
     dataPassLogin:'',
-    dataUserLogin:''
+    dataUserLogin:'',
+    urlSqlConnt:''
   });
   window.addEventListener('popstate',(e)=>{if(window.location.pathname==='/'){
     setStateLogin({
       estadoLogin:false,
       dataPassLogin:'',
-      dataUserLogin:''
+      dataUserLogin:'',
+      urlSqlConnt:''
     });
   }});
     return (
       <>
-        <ProviderLogin value = {setStateLogin}>
+        <ProviderLogin value = {{setStateLogin,stateLogin}}>
           <Router>
             <Routes>
               <Route exact path='/' element={<Login/>} />

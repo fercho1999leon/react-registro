@@ -49,7 +49,7 @@ export default function BasicModal(props) {
   </ThemeProvider> va dentro del div*/
   return (
     <div>
-      <Button sx={btn} onClick={(e)=>{props.handlerClick(e,refVtnModal,handleOpen)}}>GUARDAR</Button>
+      <Button sx={btn} onClick={(e)=>{props.handlerClick(e,refVtnModal,handleOpen,props.stateLogin)}}>GUARDAR</Button>
       <Modal
         open={open}
         onClose={handleClose}

@@ -14,7 +14,7 @@
             $this->servername = "localhost";
             $this->database = "registropostulantes"; 
             $this->username = "root";
-            $this->password = "1234";
+            $this->password = "@Fernando1999leon";
             $this->stateLogin=false;
             $this->conexionSql=null;
             $this->errorMySql=null;
