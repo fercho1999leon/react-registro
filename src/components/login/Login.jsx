@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import './loginStyle.css';
 import logoSPS from "./LOGO-SPS.svg";
@@ -22,9 +23,9 @@ const styleBX = {
     p: 4,
   };
 function loginDB(setStateLogin,navigate,handleClose){
-    const dateLogin = document.getElementsByClassName('txtBox');
-    const user = dateLogin[0].value;
-    const pass = dateLogin[1].value;
+    const user = document.getElementById('user').value;
+    const pass = document.getElementById('password').value;
+    console.log(pass);
     const url = DB;
     let urlSqlConnt = SqlConnt.split('/');
     urlSqlConnt = urlSqlConnt[urlSqlConnt.length-1];
@@ -71,7 +72,7 @@ export default function Login(props) {
                 <p className="titulo">INSTITUTO SUPERIOR</p>
                 <p className="titulo">REY DAVID</p>
                 <p id="descripcion" style={{ "font-size": "90%", "margin": "0 5%", "margin-top": "5%" }}>
-                    Sistema integrado del Instituto Superior Tecnico Rey David
+                    Sistema de registro del Instituto Superior Tecnico Rey David
                 </p>
             </div>
             <div className="content-login content-right">
@@ -80,18 +81,8 @@ export default function Login(props) {
                     <p style={{ "font-size": "80%" }}>Digital tus credenciales</p>
                 </header>
                 <main>
-                    <input
-                        type="text"
-                        id="user"
-                        placeholder=" Cedula/Pasaporte"
-                        className="txtBox"
-                    />
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder=" Password"
-                        className="txtBox"
-                    />
+                    <TextField id="user" label="Cedula/Pasaporte" variant="standard" />
+                    <TextField type="password" id="password" label="Password" variant="standard" />
                     <p id="messageError" style={{ "color": "red", "font-size": "90%" }}></p>
                     <BasicModal navigate={navigate} setStateLogin={setStateLogin['setStateLogin']}></BasicModal>
                     <a id="btnAbrir" style={{ "text-decoration": "none", "align-self": "flex-start", "margin-left": "5%" }}>Recuperar Contraseña</a>
