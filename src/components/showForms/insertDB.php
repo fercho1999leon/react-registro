@@ -35,6 +35,7 @@
 					mysqli_query($conn, $sql);
 				}
 			}
+			$dbMySql->registerQuery(1,$correo);
 			$dbMySql->closeConnetSql();
 			echo 0;//ok
 		}else{

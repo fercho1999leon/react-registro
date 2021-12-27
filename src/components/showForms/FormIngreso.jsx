@@ -9,7 +9,7 @@ const styleRadio = {
     margin: "auto 10px"
 }
 const eventBtnGuardar = (e,refVtnModal,handleOpen,stateLogin) =>{
-    const urlSqlConn = stateLogin['urlSqlConnt'];
+    const urlSqlConnt = stateLogin['urlSqlConnt'];
     const user = stateLogin['dataUserLogin'];
     const pass = stateLogin['dataPassLogin'];
     const arrayData = document.getElementsByClassName('dataOut');
@@ -29,7 +29,7 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,stateLogin) =>{
         observacion:arrayData[7].value,
         ciudad:arrayData[8].selectedIndex,
         estado:estadoUsuario,
-        urlSqlConn,
+        urlSqlConnt,
         user,
         pass
     }
@@ -43,6 +43,7 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,stateLogin) =>{
     }).then(response => {
         return response.text();
     }).then(respuestaText =>{
+        console.log(respuestaText);
         if(respuestaText==0){
             refVtnModal.current.textContent="USUARIO CREADO CORRECTAMENTE";
         }else if(respuestaText==1){

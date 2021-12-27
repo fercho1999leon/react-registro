@@ -10,11 +10,10 @@
         private $passLogin;
         private $userLogin;
         public function __construct($pass,$user){
-            $encritPass = md5($pass);
             $this->servername = "localhost";
             $this->database = "registropostulantes"; 
             $this->username = "root";
-            $this->password = "@Fernando1999leon";
+            $this->password = "1234";
             $this->stateLogin=false;
             $this->conexionSql=null;
             $this->errorMySql=null;
@@ -29,7 +28,7 @@
                 if($select = mysqli_query($conn,$sql)){
                     $rawdata = $row = mysqli_fetch_array($select);
                     if($rawdata!=null){
-                        if($encritPass==$rawdata['passwordLogin']){
+                        if($pass==$rawdata['passwordLogin']){
                             $this->stateLogin=true;
                             $this->passLogin=$rawdata['passwordLogin'];
                             $this->userLogin=$user;
@@ -77,6 +76,16 @@
         }
         public function getStateLogin(){
             return $this->stateLogin;
+        }
+        public function registerQuery($typeQuery,$correo){
+            if($this->stateLogin){
+                $sql = "INSERT INTO registeractiviti (activiti_idactiviti,user_id,postulante_correo) VALUES ({$typeQuery},'{$this->userLogin}','{$correo}');";
+                if(mysqli_query($this->conexionSql,$sql)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
         }
     }
 ?>

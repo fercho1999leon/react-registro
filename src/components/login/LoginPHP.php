@@ -4,8 +4,10 @@
     include $dataJson->urlSqlConnt;
     $user = $dataJson->user;
     $pass = $dataJson->pass;
-    $dbMySql = new SqlConnetPHP($pass,$user);
+    $encritPass = md5($pass);
+    $dbMySql = new SqlConnetPHP($encritPass,$user);
     if($dbMySql->getStateLogin()){
+        $dbMySql->registerQuery(4,'login');
         $dbMySql->closeConnetSql();
         echo ($dbMySql->getPassLogin());
     }else{

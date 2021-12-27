@@ -19,7 +19,7 @@ export default function AdminRouter() {
     });
   }});
     return (
-      <>
+      <div style={{'background-color':'#dbe3eb'}}>
         <ProviderLogin value = {{setStateLogin,stateLogin}}>
           <Router>
             <Routes>
@@ -29,7 +29,7 @@ export default function AdminRouter() {
             </Routes>
           </Router>
         </ProviderLogin>
-      </>
+      </div>
     );
 }
   

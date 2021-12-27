@@ -1,20 +1,19 @@
 <?php
     $x = $_POST['data'];
-	$servername = "192.168.1.2";
-	$database = "registropostulantes"; 
-	$username = "registropostulantes";
-	$password = "Istred1995.";
-    $conn = mysqli_connect($servername, $username, $password, $database);
-    // Check connection
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
     $dataJson = json_decode($x);
+    include $dataJson->urlSqlConnt;
     $parametro = $dataJson->parametro;
-    foreach($parametro as $posicion=>$valor){
-	    $sql = "DELETE FROM postulante WHERE (correo = '{$valor}');";
-        mysqli_query($conn,$sql);
-	}
-    mysqli_close($conn);
-    echo "ok";
+    $user = $dataJson->user;
+    $pass = $dataJson->pass;
+    $dbMySql = new SqlConnetPHP($pass,$user);
+    if($dbMySql->getStateLogin()){
+        $conn = $dbMySql->getConexionSql();
+        foreach($parametro as $posicion=>$valor){
+            $sql = "DELETE FROM postulante WHERE (correo = '{$valor}');";
+            mysqli_query($conn,$sql);
+            $dbMySql->registerQuery(3,$valor);
+        }
+        $dbMySql->closeConnetSql();
+        echo "ok";
+    }
 ?>

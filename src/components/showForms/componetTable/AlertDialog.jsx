@@ -10,6 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import DB from "./delectePHP.php";
+import ContextLogin from '../../ContextLogin';
 
 export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
@@ -17,16 +18,23 @@ export default function AlertDialog(props) {
     estadoText:0,
     estadoBTN:0
   });
+  const stateLogin = React.useContext(ContextLogin);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (e,stateLogin) => {
     const url = DB;
     const parametro = props.selected;
+    const urlSqlConnt = stateLogin['urlSqlConnt'];
+    const user = stateLogin['dataUserLogin'];
+    const pass = stateLogin['dataPassLogin'];
     let archivoDatos = {
-      parametro
+      parametro,
+      urlSqlConnt,
+      user,
+      pass
     }
     archivoDatos = JSON.stringify(archivoDatos);
     let formData = new FormData();
@@ -41,7 +49,6 @@ export default function AlertDialog(props) {
     })
     .then(res => {return res.text()})
     .then(dataJson => {
-        //console.log(dataJson);
         if(dataJson.length>0){
           if(dataJson=="ok"){
             setConsulta({
@@ -84,7 +91,9 @@ export default function AlertDialog(props) {
       return (
       <>
         <Button onClick={(e)=>{setOpen(false)}}>Cancelar</Button>
-        <Button onClick={handleClose} autoFocus>
+        <Button onClick={(e)=>{
+          handleClose(e,stateLogin['stateLogin']);
+        }} autoFocus>
           Eliminar
         </Button>
       </>);
@@ -103,7 +112,6 @@ export default function AlertDialog(props) {
       </IconButton>
       <Dialog
         open={open}
-        onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >

@@ -18,7 +18,7 @@ import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
-import configForm from './configForm.json'
+import configForm from '../../configForm.json'
 import BasicMenu from './BasicMenu';
 import AlertDialog from './AlertDialog';
 import BasicModalUpDate from '../vtnModalUpDate/BasicModalUpDate';

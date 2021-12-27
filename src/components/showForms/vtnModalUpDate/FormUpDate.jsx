@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Component} from "react";
 import "../FormIngresoStyle.css";
-import configForm from "./configForm.json";
+import ContextLogin from '../../ContextLogin';
+import configForm from "../../configForm.json";
 import DB from "./upDateDB.php";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -10,13 +11,16 @@ import CircularProgress from '@mui/material/CircularProgress';
 const styleRadio = {
     margin: "auto 10px"
 }
-const packageData=(dataUpDate,setSatateConsulta)=>{
+const packageData=(dataUpDate,setSatateConsulta,stateLogin)=>{
     const arrayData = document.getElementsByClassName('dataOut');
     const text = document.getElementsByClassName('text-result-get');
     let estadoUsuario;
     const typeInteres = arrayData[4].checked ? 1:2;
     const url = DB;
     const idUpdate=dataUpDate.correo;
+    const urlSqlConnt = stateLogin['urlSqlConnt'];
+    const user = stateLogin['dataUserLogin'];
+    const pass = stateLogin['dataPassLogin'];
     if(arrayData[9].checked){estadoUsuario=1}
     else if(arrayData[10].checked){estadoUsuario=2}
     else if(arrayData[11].checked){estadoUsuario=3}
@@ -30,7 +34,10 @@ const packageData=(dataUpDate,setSatateConsulta)=>{
         observacion:arrayData[7].value,
         ciudad:arrayData[8].selectedIndex,
         estado:estadoUsuario,
-        idUpdate
+        idUpdate,
+        urlSqlConnt,
+        user,
+        pass
     }
     archivoDatos = JSON.stringify(archivoDatos);
     let formData = new FormData();
@@ -66,10 +73,11 @@ const style = {
   
   function ChildModal(props) {
     const [open, setOpen] = React.useState(false);
+    const stateLogin = React.useContext(ContextLogin);
     const [stateConsulta, setSatateConsulta] = React.useState(false);
     const handleOpen = () => {
       setOpen(true);
-      packageData(props.dataUpDate,setSatateConsulta);
+      packageData(props.dataUpDate,setSatateConsulta,stateLogin['stateLogin']);
     };
     const handleClose = () => {
         setOpen(false);

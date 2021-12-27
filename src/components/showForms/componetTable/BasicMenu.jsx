@@ -4,17 +4,25 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import DB from "./filterPHP.php";
+import ContextLogin from '../../ContextLogin';
 
 export default function BasicMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const stateLogin = React.useContext(ContextLogin);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (e,parametro) => {
+  const handleClose = (e,parametro,stateLoginP) => {
     const url = DB;
+    const urlSqlConnt = stateLoginP['urlSqlConnt'];
+    const user = stateLoginP['dataUserLogin'];
+    const pass = stateLoginP['dataPassLogin'];
     let archivoDatos = {
-      parametro
+      parametro,
+      urlSqlConnt,
+      user,
+      pass
     }
     archivoDatos = JSON.stringify(archivoDatos);
     let formData = new FormData();
@@ -54,9 +62,9 @@ export default function BasicMenu(props) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={(e)=>handleClose(e,1)}>Contactado</MenuItem>
-        <MenuItem onClick={(e)=>handleClose(e,2)}>Sin contactar</MenuItem>
-        <MenuItem onClick={(e)=>handleClose(e,3)}>Cita</MenuItem>
+        <MenuItem onClick={(e)=>handleClose(e,1,stateLogin['stateLogin'])}>Contactado</MenuItem>
+        <MenuItem onClick={(e)=>handleClose(e,2,stateLogin['stateLogin'])}>Sin contactar</MenuItem>
+        <MenuItem onClick={(e)=>handleClose(e,3,stateLogin['stateLogin'])}>Cita</MenuItem>
       </Menu>
     </div>
   );

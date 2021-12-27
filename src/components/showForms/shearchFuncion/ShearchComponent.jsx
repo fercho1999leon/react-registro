@@ -4,12 +4,14 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import "./ShearchComponentStyle.css";
+import ContextLogin from '../../ContextLogin';
 import shearch from './shearch.js';
 const style = {
     backgroundColor: 'var(--color-primary)'
 }
 export default function ShearchComponent(props){
     const refTextShearch = React.useRef();
+    const stateLogin = React.useContext(ContextLogin);
     return(
         <div className="shearch">
                 <label htmlFor="idShearch">Buscar: </label>
@@ -25,7 +27,7 @@ export default function ShearchComponent(props){
                 </Box>
                 <span></span>
                 <Stack direction="row" spacing={2}>
-                    <Button onClick={(e)=>shearch(e,refTextShearch,props.setData,props.setBandera)} sx={style} variant="contained">
+                    <Button onClick={(e)=>shearch(e,refTextShearch,props.setData,props.setBandera,stateLogin['stateLogin'])} sx={style} variant="contained">
                         BUSCAR
                     </Button>
                 </Stack>
