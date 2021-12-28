@@ -18,7 +18,7 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
-  "homepage": "https://192.168.1.2/registro",
+  "homepage": "http://localhost/registro",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

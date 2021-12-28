@@ -44,7 +44,7 @@ function loginDB(setStateLogin,navigate,handleClose){
         return res.text();
     })
     .then(dataJson => {
-        if(dataJson.length>0 && dataJson!=0 && !dataJson.includes('<br />') && !dataJson.includes('Error')){
+        if(dataJson.length>0 && dataJson!=0 && !dataJson.includes('<br />') && !dataJson.includes('Error') && !dataJson.includes('php')){
             setStateLogin({
                 estadoLogin:true,
                 dataPassLogin:dataJson,

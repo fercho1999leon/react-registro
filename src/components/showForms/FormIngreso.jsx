@@ -42,10 +42,13 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,stateLogin) =>{
     }).then(response => {
         return response.text();
     }).then(respuestaText =>{
-        if(respuestaText==0){
+        console.log(respuestaText);
+        if(respuestaText==0 && respuestaText!=""){
             refVtnModal.current.textContent="USUARIO CREADO CORRECTAMENTE";
         }else if(respuestaText==1){
             refVtnModal.current.textContent="Error en insert (Usuario ya existe)";
+        }else{
+            refVtnModal.current.textContent="Error";
         }
     });
     handleOpen();
