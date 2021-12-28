@@ -34,7 +34,6 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,stateLogin) =>{
         pass
     }
     archivoDatos = JSON.stringify(archivoDatos);
-    console.log(archivoDatos);
     let formData = new FormData();
     formData.append('data', archivoDatos);
     fetch(url,{
@@ -43,7 +42,6 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,stateLogin) =>{
     }).then(response => {
         return response.text();
     }).then(respuestaText =>{
-        console.log(respuestaText);
         if(respuestaText==0){
             refVtnModal.current.textContent="USUARIO CREADO CORRECTAMENTE";
         }else if(respuestaText==1){

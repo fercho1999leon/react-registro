@@ -25,7 +25,6 @@ const styleBX = {
 function loginDB(setStateLogin,navigate,handleClose){
     const user = document.getElementById('user').value;
     const pass = document.getElementById('password').value;
-    console.log(pass);
     const url = DB;
     let urlSqlConnt = SqlConnt.split('/');
     urlSqlConnt = urlSqlConnt[urlSqlConnt.length-1];
