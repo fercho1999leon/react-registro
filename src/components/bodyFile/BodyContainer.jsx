@@ -3,6 +3,7 @@ import NavMain from "../navBtn/NavMain";
 import FormIngreso from "../showForms/FormIngreso";
 import FormWelcome from "../showForms/FormWelcome";
 import FormShowDate from "../showForms/FormShowDate";
+import FormDownload from "../showForms/FormDownload";
 import "./BodyContainerStyle.css";
 export default class BodyContainer extends Component{
     constructor (props){
@@ -20,6 +21,8 @@ export default class BodyContainer extends Component{
             return (<FormIngreso stateBodyContainer = {this}></FormIngreso>);
         }else if(stateForm==3){
             return (<FormShowDate></FormShowDate>);
+        }else if(stateForm==4){
+            return (<FormDownload></FormDownload>);
         }else{
             return (<FormWelcome></FormWelcome>);
         }

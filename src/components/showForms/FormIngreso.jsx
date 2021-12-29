@@ -82,11 +82,6 @@ class RenderListInteres extends Component {
         if(this.state.nodoInteres==1){
             return(
                 <>
-                    <h3>Interes</h3>
-                    <label htmlFor="idCarrera">Carrera</label>
-                    <input type="radio" className="dataOut" style={styleRadio} id="idCarrera" name="interes" value="carrera" onClick={this.eventRadioInteres} defaultChecked={this.selectChecked(1)}/>
-                    <label htmlFor="idCurso">Curso</label>
-                    <input type="radio" className="dataOut" style={styleRadio} id="idCurso" name="interes" value="curso" onClick={this.eventRadioInteres} defaultChecked={this.selectChecked(2)} />
                     <select className="FormIngresoStyleComponents dataOut" id="idInteres">
                         <option key={0} value="0">Selccione</option>
                         {
@@ -102,11 +97,6 @@ class RenderListInteres extends Component {
         }else if(this.state.nodoInteres==2){
             return(
                 <>
-                    <h3>Interes</h3>
-                    <label htmlFor="idCarrera">Carrera</label>
-                    <input type="radio" className="dataOut" style={styleRadio} id="idCarrera" name="interes" value="carrera" onClick={this.eventRadioInteres} defaultChecked={this.selectChecked(1)} />
-                    <label htmlFor="idCurso">Curso</label>
-                    <input type="radio" className="dataOut" style={styleRadio} id="idCurso" name="interes" value="curso" onClick={this.eventRadioInteres} defaultChecked={this.selectChecked(2)} />
                     <select className="FormIngresoStyleComponents dataOut" id="idInteres">
                         <option key={0} value="0">Selccione</option>
                         {
@@ -122,7 +112,16 @@ class RenderListInteres extends Component {
         }
     }
     render(){
-        return this.renderList();
+        return (
+            <>
+                <h3>Interes</h3>
+                <label htmlFor="idCarrera">Carrera</label>
+                <input type="radio" className="dataOut" style={styleRadio} id="idCarrera" name="interes" value="carrera" onClick={this.eventRadioInteres} defaultChecked={this.selectChecked(1)}/>
+                <label htmlFor="idCurso">Curso</label>
+                <input type="radio" className="dataOut" style={styleRadio} id="idCurso" name="interes" value="curso" onClick={this.eventRadioInteres} defaultChecked={this.selectChecked(2)} />
+                {this.renderList()}
+            </>
+        );
     }
 }
 export default function FormIngreso(props){
