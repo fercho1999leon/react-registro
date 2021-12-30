@@ -20,7 +20,7 @@
                     $rawdata[$i] = $row; 
                     $i++; 
                 }
-                mysqli_close($conn);
+                $dbMySql->closeConnetSql();
                 echo json_encode($rawdata);
             }
         }else{
@@ -35,7 +35,7 @@
                     $rawdata[$i] = $row; 
                     $i++; 
                 }
-                mysqli_close($conn);
+                $dbMySql->closeConnetSql();
                 echo json_encode($rawdata);
             }
         }

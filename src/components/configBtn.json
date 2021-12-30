@@ -5,12 +5,16 @@
             "name":"INGRESO"
         },
         {
-            "id":3,
+            "id":2,
             "name":"MOSTRAR"
         },
         {
-            "id":4,
+            "id":3,
             "name":"DESCARGA USER"
+        },
+        {
+            "id":4,
+            "name":"ADD T & C"
         }
     ]
 }

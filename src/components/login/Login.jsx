@@ -37,16 +37,16 @@ function loginDB(setStateLogin,navigate,handleClose){
     let formData = new FormData();
     formData.append('data', archivoDatos);
     /*----------------------------------------------------------*/
-    setStateLogin({
+    /*setStateLogin({
         estadoLogin:true,
         dataPassLogin:pass,
         dataUserLogin:user,
         urlSqlConnt
     });
     handleClose();
-    navigate('/registerUser');
+    navigate('/registerUser'); */
     /*----------------------------------------------------------*/
-    /*fetch(url,{
+    fetch(url,{
         method: 'POST', 
         body: formData, 
     })
@@ -69,7 +69,7 @@ function loginDB(setStateLogin,navigate,handleClose){
     }).catch((err)=>{
         handleClose();
         console.log(err);
-    }); */
+    });
 }
 export default function Login(props) {
     let navigate = useNavigate();
