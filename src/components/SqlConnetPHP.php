@@ -24,7 +24,7 @@
                 $conn=null;
                 die("Connection failed: " . $errorMySql);
             }else{
-                $sql = "SELECT passwordLogin FROM userLogin WHERE id='{$user}';";
+                $sql = "SELECT passwordLogin FROM user WHERE id='{$user}';";
                 if($select = mysqli_query($conn,$sql)){
                     $rawdata = $row = mysqli_fetch_array($select);
                     if($rawdata!=null){

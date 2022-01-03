@@ -42,9 +42,19 @@ const onClickAddCyT = (e,StateLogin,setStateLogin) =>{
         method: 'POST', 
         body: formData, 
     }).then(response => {
-        return response.text();
-    }).then(respuestaText =>{
-        console.log(respuestaText);
+        return response.json();
+    }).then(respuesta =>{
+        if(respuesta['state']){
+            setStateLogin({
+                estadoLogin:StateLogin.estadoLogin,
+                dataPassLogin:StateLogin.dataPassLogin,
+                dataUserLogin:StateLogin.dataUserLogin,
+                urlSqlConnt:StateLogin.urlSqlConnt,
+                dateJson:respuesta['data'],
+                urlConfig:StateLogin.urlConfig,
+            });
+        }
+        console.log(respuesta);
     });
 }
 export default function FormAddTyC(){
