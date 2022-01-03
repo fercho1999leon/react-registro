@@ -1,5 +1,4 @@
 import * as React from 'react';
-import configForm from '../configForm.json';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import FormGroup from '@mui/material/FormGroup';
@@ -89,7 +88,7 @@ function RenderListInteres(){
                     <select className="FormIngresoStyleComponents dataOut" id="idInteres">
                         <option key={0} value="0">Selccione</option>
                         {
-                            configForm.listInteresC.map(
+                            stateLogin['stateLogin'].dateJson.listInteresC.map(
                                 (el)=>(
                                     <option key={el.id} value={el.id}>{el.name}</option>
                                 )
@@ -104,7 +103,7 @@ function RenderListInteres(){
                     <select className="FormIngresoStyleComponents dataOut" id="idInteres">
                         <option key={0} value="0">Selccione</option>
                         {
-                            configForm.listInteresT.map(
+                            stateLogin['stateLogin'].dateJson.listInteresT.map(
                                 (el)=>(
                                     <option key={el.id} value={el.id}>{el.name}</option>
                                 )

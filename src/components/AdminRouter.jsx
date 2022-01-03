@@ -8,14 +8,37 @@ export default function AdminRouter() {
     estadoLogin:false,
     dataPassLogin:'',
     dataUserLogin:'',
-    urlSqlConnt:''
+    urlSqlConnt:'',
+    dateJson:'',
+    urlConfig:null,
   });
+  if(stateLogin.urlConfig==null){
+    const urlConfig = window.location.href+'config.json';
+    fetch(window.location.href+'config.json',{
+      method: 'GET'
+    }).then(response => {
+      return response.json();
+    }).then(respuestaText =>{
+      setStateLogin({
+        estadoLogin:false,
+        dataPassLogin:'',
+        dataUserLogin:'',
+        urlSqlConnt:'',
+        dateJson:respuestaText,
+        urlConfig,
+      });
+    }).catch(err =>{
+      console.log('ERROR JSON');
+    });
+  }
   window.addEventListener('popstate',(e)=>{if(window.location.pathname==='/'){
     setStateLogin({
       estadoLogin:false,
       dataPassLogin:'',
       dataUserLogin:'',
-      urlSqlConnt:''
+      urlSqlConnt:'',
+      dateJson:stateLogin.dateJson,
+      urlConfig:stateLogin.urlConfig,
     });
   }});
     return (

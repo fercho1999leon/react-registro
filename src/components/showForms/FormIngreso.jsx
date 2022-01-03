@@ -1,6 +1,5 @@
 import React,{Component} from "react";
 import "./FormIngresoStyle.css";
-import configForm from "../configForm.json";
 import DB from "./insertDB.php";
 import BasicModal from "./ventanaModal/BasicModal";
 import ContextLogin from "../ContextLogin";
@@ -85,7 +84,7 @@ class RenderListInteres extends Component {
                     <select className="FormIngresoStyleComponents dataOut" id="idInteres">
                         <option key={0} value="0">Selccione</option>
                         {
-                            configForm.listInteresC.map(
+                            this.props.stateLogin['stateLogin'].dateJson.listInteresC.map(
                                 (el)=>(
                                     <option key={el.id} value={el.id}>{el.name}</option>
                                 )
@@ -100,7 +99,7 @@ class RenderListInteres extends Component {
                     <select className="FormIngresoStyleComponents dataOut" id="idInteres">
                         <option key={0} value="0">Selccione</option>
                         {
-                            configForm.listInteresT.map(
+                            this.props.stateLogin['stateLogin'].dateJson.listInteresT.map(
                                 (el)=>(
                                     <option key={el.id} value={el.id}>{el.name}</option>
                                 )
@@ -145,14 +144,14 @@ export default function FormIngreso(props){
                     </div>
                     <div className="FormIngresoRight">
                         <div>
-                            <RenderListInteres />
+                            <RenderListInteres stateLogin={stateLogin}/>
                         </div>
                         <label htmlFor="idObservacion">Observacion</label>
                         <textarea id="idObservacion" className="dataOut" rows="5" cols="50"></textarea>
                         <label htmlFor="idCiudad">Ciudad</label>
                         <select className="FormIngresoStyleComponents dataOut" id="idCiudad">
                             <option key={0} value="0">Selccione</option>
-                            {configForm.listCiudades.map((el)=>(
+                            {stateLogin['stateLogin'].dateJson.listCiudades.map((el)=>(
                                 <option key={el.id} value={el.id}>{el.name}</option>
                             ))}
                         </select>

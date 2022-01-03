@@ -18,11 +18,11 @@ import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
-import configForm from '../../configForm.json'
 import BasicMenu from './BasicMenu';
 import AlertDialog from './AlertDialog';
 import BasicModalUpDate from '../vtnModalUpDate/BasicModalUpDate';
-
+import ContextLogin from '../../ContextLogin';
+let stateLogin;
 function createData(fecha, nombre, apellido, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
   return {
     fecha, 
@@ -40,25 +40,25 @@ function createData(fecha, nombre, apellido, correo, numero, observacion, estado
 const rows = [];
 function translateData(idDate,opc){
   if(opc==1){
-    return configForm.estados.map((el)=>{
+    return stateLogin['stateLogin'].dateJson.estados.map((el)=>{
       if(el.id==idDate){
         return el.name;
       }
     });
   }else if(opc==2){
-    return configForm.listCiudades.map((el)=>{
+    return stateLogin['stateLogin'].dateJson.listCiudades.map((el)=>{
       if(el.id==idDate){
         return el.name;
       }
     });
   }else if(opc==3){
-    return configForm.listInteresT.map((el)=>{
+    return stateLogin['stateLogin'].dateJson.listInteresT.map((el)=>{
       if(el.id==idDate){
         return el.name;
       }
     });
   }else if(opc==4){
-    return configForm.listInteresC.map((el)=>{
+    return stateLogin['stateLogin'].dateJson.listInteresC.map((el)=>{
       if(el.id==idDate){
         return el.name;
       }
@@ -288,6 +288,7 @@ export default function EnhancedTable(props) {
     insertData(props.data);
     props.setBandera(false);
   }
+  stateLogin = React.useContext(ContextLogin);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('fecha');
   const [selected, setSelected] = React.useState([]);

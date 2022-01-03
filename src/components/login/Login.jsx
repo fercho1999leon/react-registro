@@ -22,7 +22,9 @@ const styleBX = {
     boxShadow: 24,
     p: 4,
   };
-function loginDB(setStateLogin,navigate,handleClose){
+function loginDB(StateLogin,navigate,handleClose){
+    const setStateLogin = StateLogin['setStateLogin'];
+    const stateLogin = StateLogin['stateLogin'];
     const user = document.getElementById('user').value;
     const pass = document.getElementById('password').value;
     const url = DB;
@@ -59,7 +61,9 @@ function loginDB(setStateLogin,navigate,handleClose){
                 estadoLogin:true,
                 dataPassLogin:dataJson,
                 dataUserLogin:user,
-                urlSqlConnt
+                urlSqlConnt,
+                dateJson:stateLogin.dateJson,
+                urlConfig:stateLogin.urlConfig,
             });
             handleClose();
             navigate('/registerUser');
@@ -73,7 +77,7 @@ function loginDB(setStateLogin,navigate,handleClose){
 }
 export default function Login(props) {
     let navigate = useNavigate();
-    const setStateLogin = React.useContext(ContextLogin);
+    const StateLogin = React.useContext(ContextLogin);
     return (
         <div className="BodyLogin">
             <div className="content-login content-left">
@@ -93,7 +97,7 @@ export default function Login(props) {
                     <TextField id="user" label="Cedula/Pasaporte" variant="standard" />
                     <TextField type="password" id="password" label="Password" variant="standard" />
                     <p id="messageError" style={{ "color": "red", "font-size": "90%" }}></p>
-                    <BasicModal navigate={navigate} setStateLogin={setStateLogin['setStateLogin']}></BasicModal>
+                    <BasicModal navigate={navigate} StateLogin={StateLogin}></BasicModal>
                     <a id="btnAbrir" style={{ "text-decoration": "none", "align-self": "flex-start", "margin-left": "5%" }}>Recuperar Contraseña</a>
                 </main>
             </div>
@@ -110,7 +114,7 @@ function BasicModal(props) {
         <Stack spacing={2} direction="row">
             <Button sx={{bgcolor:'var(--color-primary)'}} onClick={(e)=>{
                 handleOpen();
-                loginDB(props.setStateLogin,props.navigate,handleClose);
+                loginDB(props.StateLogin,props.navigate,handleClose);
             }} variant="contained">Iniciar Session</Button>
         </Stack>
         <Modal

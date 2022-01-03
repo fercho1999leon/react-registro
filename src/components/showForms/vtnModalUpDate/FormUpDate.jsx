@@ -2,7 +2,6 @@ import * as React from 'react';
 import {Component} from "react";
 import "../FormIngresoStyle.css";
 import ContextLogin from '../../ContextLogin';
-import configForm from "../../configForm.json";
 import DB from "./upDateDB.php";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -134,7 +133,7 @@ class RenderListInteres extends Component {
         if(this.state.nodoInteres==1){
             let valorCarrera = -1;
             const statusCarrera = () =>{
-                configForm.listInteresC.map(
+                this.props.stateLogin['stateLogin'].dateJson.listInteresC.map(
                     (el)=>{
                         this.props.dataUpDate.carrera_idcarrera.map((elC)=>{
                             if(elC==el.name){
@@ -155,7 +154,7 @@ class RenderListInteres extends Component {
                     <select className="FormIngresoStyleComponents dataOut" id="idInteres">
                         <option key={0} value="0">Selccione</option>
                         {
-                            configForm.listInteresC.map(
+                            this.props.stateLogin['stateLogin'].dateJson.listInteresC.map(
                                 (el)=>(
                                     <option key={el.id} value={el.id} selected={valorCarrera==el.id?true:false}>{el.name}</option>
                                 )
@@ -167,7 +166,7 @@ class RenderListInteres extends Component {
         }else if(this.state.nodoInteres==2){
             let valorCurso = -1;
             const statusCurso = () =>{
-                configForm.listInteresT.map(
+                this.props.stateLogin['stateLogin'].dateJson.listInteresT.map(
                     (el)=>{
                         this.props.dataUpDate.curso_idcurso.map((elT)=>{
                             if(elT==el.name){
@@ -188,7 +187,7 @@ class RenderListInteres extends Component {
                     <select className="FormIngresoStyleComponents dataOut" id="idInteres">
                         <option key={0} value="0">Selccione</option>
                         {
-                            configForm.listInteresT.map(
+                            this.props.stateLogin['stateLogin'].dateJson.listInteresT.map(
                                 (el)=>(
                                     <option key={el.id} value={el.id} selected={valorCurso==el.id?true:false} >{el.name}</option>
                                 )
@@ -203,16 +202,13 @@ class RenderListInteres extends Component {
         return this.renderList();
     }
 }
-export default class FormUpDate extends Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
+export default function FormUpDate(props){
+        const stateLogin = React.useContext(ContextLogin);
         let valorCiudad = -1;
         const statusCiudad = () =>{
-            configForm.listCiudades.map(
+            stateLogin['stateLogin'].dateJson.listCiudades.map(
                 (el)=>{
-                    this.props.dataUpDate.ciudad_idciudad.map((elC)=>{
+                    props.dataUpDate.ciudad_idciudad.map((elC)=>{
                         if(elC==el.name){
                             valorCiudad = el.id;
                         }
@@ -223,7 +219,7 @@ export default class FormUpDate extends Component{
         statusCiudad();
         let valorState = -1;
         const statusState = () =>{
-            this.props.dataUpDate.estado_idestado.map((el)=>{
+            props.dataUpDate.estado_idestado.map((el)=>{
                 if(el=="Contactado"){
                     valorState=1;
                     return;
@@ -246,24 +242,24 @@ export default class FormUpDate extends Component{
                     <div className="FormIngresoLeftAndRight">
                         <div className="FormIngresoLeft">
                             <label htmlFor="idNombre">Nombre</label>
-                            <input className="FormIngresoStyleComponents dataOut" type="text" id="idNombre" placeholder={this.props.dataUpDate.nombre}/>
+                            <input className="FormIngresoStyleComponents dataOut" type="text" id="idNombre" placeholder={props.dataUpDate.nombre}/>
                             <label htmlFor="idApellido">Apellido</label>
-                            <input className="FormIngresoStyleComponents dataOut" type="text" id="idApellido" placeholder={this.props.dataUpDate.apellido}/>
+                            <input className="FormIngresoStyleComponents dataOut" type="text" id="idApellido" placeholder={props.dataUpDate.apellido}/>
                             <label htmlFor="idCorreo">Correo</label>
-                            <input className="FormIngresoStyleComponents dataOut" type="email" id="idCorreo" placeholder={this.props.dataUpDate.correo}/>
+                            <input className="FormIngresoStyleComponents dataOut" type="email" id="idCorreo" placeholder={props.dataUpDate.correo}/>
                             <label htmlFor="idNumeroContacto">Numero de Contacto</label>
-                            <input className="FormIngresoStyleComponents dataOut" type="number" id="idNumeroContacto" placeholder={this.props.dataUpDate.numero}/>
+                            <input className="FormIngresoStyleComponents dataOut" type="number" id="idNumeroContacto" placeholder={props.dataUpDate.numero}/>
                         </div>
                         <div className="FormIngresoRight">
                             <div>
-                                <RenderListInteres dataUpDate={this.props.dataUpDate}/>
+                                <RenderListInteres dataUpDate={props.dataUpDate} stateLogin={stateLogin}/>
                             </div>
                             <label htmlFor="idObservacion">Observacion</label>
-                            <textarea id="idObservacion" className="dataOut" rows="5" cols="50">{this.props.dataUpDate.observacion}</textarea>
+                            <textarea id="idObservacion" className="dataOut" rows="5" cols="50">{props.dataUpDate.observacion}</textarea>
                             <label htmlFor="idCiudad">Ciudad</label>
                             <select className="FormIngresoStyleComponents dataOut" id="idCiudad">
                                 <option key={0} value="0">Selccione</option>
-                                {configForm.listCiudades.map((el)=>(
+                                {stateLogin['stateLogin'].dateJson.listCiudades.map((el)=>(
                                     <option key={el.id} value={el.id} selected={valorCiudad==el.id?true:false} >{el.name}</option>
                                 ))}
                             </select>
@@ -280,9 +276,8 @@ export default class FormUpDate extends Component{
                     </div>
                 </div>
                 <div className="FormIngreso">
-                    <ChildModal setCloseParent={this.props.setCloseParent} dataUpDate={this.props.dataUpDate}/>
+                    <ChildModal setCloseParent={props.setCloseParent} dataUpDate={props.dataUpDate}/>
                 </div>
             </div>
         );
-    }
 }
