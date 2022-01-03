@@ -19,10 +19,11 @@ const SxBtn = {
     color: 'white',
     'margin-top': '20px'
 };
-const onClickAddCyT = (e,StateLogin) =>{
+const onClickAddCyT = (e,StateLogin,setStateLogin) =>{
     const urlSqlConnt = StateLogin['urlSqlConnt'];
     const user = StateLogin['dataUserLogin'];
     const pass = StateLogin['dataPassLogin'];
+    const urlConfig = StateLogin['urlConfig'];
     const dataForm = document.getElementsByClassName('dataOut');
     const typeInteres = dataForm[0].childNodes[0].checked?1:2;
     const name = dataForm[2].childNodes[1].childNodes[0].value;
@@ -30,14 +31,21 @@ const onClickAddCyT = (e,StateLogin) =>{
         typeInteres,
         name,
         urlSqlConnt,
+        urlConfig,
         user,
-        pass
+        pass,
     }
-    /*const id = archivoDatos['configForm'].listInteresC.length+1;
-    console.log(archivoDatos);
-    archivoDatos['configForm'].listInteresC.push({id,name});
-    console.log(archivoDatos);
-    const formData = new FormData();*/
+    archivoDatos = JSON.stringify(archivoDatos);
+    let formData = new FormData();
+    formData.append('data', archivoDatos);
+    fetch(DB,{
+        method: 'POST', 
+        body: formData, 
+    }).then(response => {
+        return response.text();
+    }).then(respuestaText =>{
+        console.log(respuestaText);
+    });
 }
 export default function FormAddTyC(){
     const StateLogin = React.useContext(ContextLogin);
@@ -66,7 +74,7 @@ export default function FormAddTyC(){
         </Box>
         <Stack spacing={2} direction="row">
             <Button sx={SxBtn} onClick={(e)=>{
-                onClickAddCyT(e,StateLogin);
+                onClickAddCyT(e,StateLogin['stateLogin'],StateLogin['setStateLogin']);
             }} variant="contained">AGREGAR</Button>
         </Stack>
     </div>
