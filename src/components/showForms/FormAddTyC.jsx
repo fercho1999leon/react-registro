@@ -54,7 +54,6 @@ const onClickAddCyT = (e,StateLogin,setStateLogin) =>{
                 urlConfig:StateLogin.urlConfig,
             });
         }
-        console.log(respuesta);
     });
 }
 export default function FormAddTyC(){

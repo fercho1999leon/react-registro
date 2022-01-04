@@ -26,7 +26,8 @@
 
         }else if($typeInteres==2){
             $temp = sizeof($data['listInteresT']);
-            array_push($data['listInteresT'],array('id'=>$temp+1,'name'=>$name));
+            $temp = $temp+1;
+            array_push($data['listInteresT'],array('id'=>$temp,'name'=>$name));
             $sql = "INSERT INTO curso (idcurso, nombre) VALUES ('{$temp}', '{$name}');";
             if(mysqli_query($conn,$sql)){
                 $exportData['state']=true;
@@ -37,8 +38,8 @@
         $newJsonString = json_encode($data);
         $padre = dirname(__DIR__);
 		$urlJson = dirname($padre);
-		$urlJson = $urlJson.'\config.json';
-		file_put_contents($urlJson, $newJsonString);
+		$urlJson = $urlJson.'/config.json';
+		$result = file_put_contents($urlJson, $newJsonString);
         $exportData['data']=$exportData['state']?$data:null;
         $dbMySql->closeConnetSql();
         echo json_encode($exportData);

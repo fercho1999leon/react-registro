@@ -37,8 +37,8 @@ export default function AdminRouter() {
       dataPassLogin:'',
       dataUserLogin:'',
       urlSqlConnt:'',
-      dateJson:stateLogin.dateJson,
-      urlConfig:stateLogin.urlConfig,
+      dateJson:'',
+      urlConfig:null,
     });
   }});
     return (

@@ -10,10 +10,10 @@
         private $passLogin;
         private $userLogin;
         public function __construct($pass,$user){
-            $this->servername = "localhost";
+            $this->servername = "192.168.1.2";
             $this->database = "registropostulantes"; 
-            $this->username = "root";
-            $this->password = "1234";
+            $this->username = "registropostulantes";
+            $this->password = "Istred1995.";
             $this->stateLogin=false;
             $this->conexionSql=null;
             $this->errorMySql=null;
@@ -24,7 +24,7 @@
                 $conn=null;
                 die("Connection failed: " . $errorMySql);
             }else{
-                $sql = "SELECT passwordLogin FROM user WHERE id='{$user}';";
+                $sql = "SELECT passwordLogin FROM userLogin WHERE id='{$user}';";
                 if($select = mysqli_query($conn,$sql)){
                     $rawdata = $row = mysqli_fetch_array($select);
                     if($rawdata!=null){
