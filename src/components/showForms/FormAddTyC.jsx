@@ -44,6 +44,7 @@ const onClickAddCyT = (e,StateLogin,setStateLogin) =>{
     }).then(response => {
         return response.json();
     }).then(respuesta =>{
+        console.log(respuesta);
         if(respuesta['state']){
             setStateLogin({
                 estadoLogin:StateLogin.estadoLogin,

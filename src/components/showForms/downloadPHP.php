@@ -24,7 +24,7 @@
                 $rawdata = array();
                 $i=0;
                 while($row = mysqli_fetch_array($select)){ 
-                    $rawdata[$i] = $row; 
+                    $rawdata[$i] = array_map("utf8_encode", $row ) ;
                     $i++; 
                 }
                 $dbMySql->closeConnetSql();

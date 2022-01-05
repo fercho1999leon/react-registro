@@ -52,6 +52,7 @@ const download = (e,stateLogin) =>{
     }).then(response => {
         return response.json();
     }).then(respuestaText =>{
+        console.log(respuestaText);
         exportExel(respuestaText);
     }).catch((err)=>{
         console.log(`Error en el json : ${err}`);
